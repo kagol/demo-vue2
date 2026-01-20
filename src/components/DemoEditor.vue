@@ -1,6 +1,8 @@
 <template>
   <div>
     <Editor v-model="htmlContent" :options="{ theme: 'snow' }" />
+    <p>HTML：</p>
+    <div>{{ htmlContent }}</div>
     <p>预览：</p>
     <div v-html="htmlContent"></div>
   </div>

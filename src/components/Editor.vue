@@ -40,10 +40,8 @@ export default {
     // 监听编辑器内容变化
     this.editor.on('text-change', () => {
       if (!this.isUpdating) {
-        const html = this.editor.root.innerHTML
-        const delta = this.editor.clipboard.convert({ html })
-        this.editor.setContents(delta, 'silent')
-        this.$emit('input', html)
+        const content = this.editor.root.innerHTML
+        this.$emit('input', content)
       }
     })
   },
@@ -62,7 +60,6 @@ export default {
   beforeDestroy() {
     // 销毁编辑器实例
     if (this.editor) {
-      // this.editor.destroy()
       this.editor = null
     }
   }
