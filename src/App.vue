@@ -2,19 +2,23 @@
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
     <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
-    <DemoEditorBasic />
+    <!-- <DemoEditorBasic /> -->
+    <DemoEditor />
   </div>
 </template>
 
 <script>
+import DemoEditor from './components/DemoEditor.vue';
+
 // import HelloWorld from './components/HelloWorld.vue'
-import DemoEditorBasic from './components/DemoEditorBasic.vue'
+// import DemoEditorBasic from './components/DemoEditorBasic.vue'
 
 export default {
   name: 'App',
   components: {
     // HelloWorld,
-    DemoEditorBasic
+    // DemoEditorBasic
+    DemoEditor
   }
 }
 </script>
