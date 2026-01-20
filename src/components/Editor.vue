@@ -24,18 +24,12 @@ export default {
   data() {
     return {
       editor: null,
-      isUpdating: false
+      isInitialized: false
     }
   },
   mounted() {
     // 初始化编辑器
     this.editor = new FluentEditor(this.$refs.editorElement, this.options)
-    
-    // 设置初始值
-    if (this.value) {
-      const delta = this.editor.clipboard.convert({ html: this.value })
-      this.editor.setContents(delta, 'silent')
-    }
     
     // 监听编辑器内容变化
     this.editor.on('text-change', () => {
@@ -44,16 +38,20 @@ export default {
         this.$emit('input', content)
       }
     })
+    
+    // 设置初始值
+    if (this.value) {
+      const delta = this.editor.clipboard.convert({ html: this.value })
+      this.editor.setContents(delta, 'silent')
+    }
+
+    this.isInitialized = true
   },
   watch: {
     value(newVal) {
-      if (this.editor && !this.isUpdating) {
-        this.isUpdating = true
+      if (this.isInitialized && this.editor && newVal !== this.editor.root.innerHTML) {
         const delta = this.editor.clipboard.convert({ html: newVal })
         this.editor.setContents(delta, 'silent')
-        this.$nextTick(() => {
-          this.isUpdating = false
-        })
       }
     }
   },
